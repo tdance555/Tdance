@@ -122,6 +122,9 @@
             </div>
             <button type="submit">送出</button>
         </form>
+
+        <!-- 手動跳轉到 manual.html 的按鈕 -->
+        <button onclick="window.location.href='manual.html'" style="margin-top: 20px;">查看使用手冊</button>
     </div>
 
     <!-- 引入intl-tel-input的JS -->
@@ -156,10 +159,10 @@
                 } else {
                     // 獲取格式化的手機號碼
                     var formattedPhoneNumber = iti.getNumber();
-                    
+
                     // 將國際化的電話號碼轉換為本地格式
                     var localPhoneNumber = formattedPhoneNumber.replace("+886", "0");
-                    
+
                     // 將本地化的電話號碼設置為隱藏字段，以便後端處理
                     var hiddenPhoneInput = document.createElement("input");
                     hiddenPhoneInput.setAttribute("type", "hidden");
@@ -175,6 +178,10 @@
                 if (document.getElementById('id_gender').value === '') {
                     alert("請選擇性別");
                     event.preventDefault(); // 阻止表單提交
+                } else {
+                    // 表單成功提交後跳轉到 manual.html
+                    event.preventDefault(); // 阻止預設提交行為
+                    window.location.href = "manual.html";
                 }
             });
         });
