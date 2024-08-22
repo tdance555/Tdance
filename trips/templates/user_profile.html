@@ -5,7 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>使用者資訊</title>
     <style>
-        /* (Existing CSS here) */
+        /* 保留原本的CSS */
+        @media (min-width: 481px) {
+            body {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                background-image: url('https://github.com/tdance555/tdance2024/blob/main/media/vendor_icons/%E4%BF%AE%E7%90%86%E7%B6%A0.png?raw=true');
+                background-size: 100% 100%;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            h1 {
+                margin-bottom: 20px;
+            }
+
+            .gender-buttons {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+
+            .gender-button {
+                padding: 10px;
+                margin: 5px;
+                cursor: pointer;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f0f0f0;
+                color: #333;
+                font-size: 16px;
+                outline: none;
+                flex: 1;
+                box-sizing: border-box;
+            }
+
+            .gender-button.selected {
+                background-color: lightseagreen;
+                color: white;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+                text-align: center;
+            }
+
+            input[type="tel"] {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            button {
+                width: 100%;
+                padding: 10px;
+                background-color: lightseagreen;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                outline: none;
+            }
+
+            .text1 {
+                font-size: 15pt;
+            }
+
+            .text2 {
+                font-size: 10pt;
+            }
+        }
     </style>
     <!-- 引入intl-tel-input的CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
@@ -41,7 +131,7 @@
             var input = document.querySelector("#phone");
             var iti = window.intlTelInput(input, {
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-                initialCountry: "TW"
+                initialCountry: "TW" 
             });
 
             let buttons = document.querySelectorAll('.gender-button');
@@ -55,24 +145,23 @@
                 });
             });
 
-            // 改變表單提交方式
+            // 修改表單提交方式
             document.getElementById('user-form').addEventListener('submit', function(event) {
-                event.preventDefault(); // 阻止表單的默認提交
+                event.preventDefault();
 
-                // 檢查手機號碼是否有效
                 if (!iti.isValidNumber()) {
                     alert("請輸入有效的手機號碼");
-                    return; // 停止進行
+                    return;
                 } else {
                     var formattedPhoneNumber = iti.getNumber();
                     var localPhoneNumber = formattedPhoneNumber.replace("+886", "0");
 
-                    // 將手機號碼和性別保存到本地存儲
+                    // 將手機號碼和性別儲存到本地儲存中
                     localStorage.setItem("phone", localPhoneNumber);
                     localStorage.setItem("gender", document.getElementById('id_gender').value);
 
-                    // 跳轉到下一頁
-                    window.location.href = "next_page.html"; // 替換為您的下一頁的URL
+                    // 跳轉到 manual.html
+                    window.location.href = "manual.html";
                 }
             });
         });
